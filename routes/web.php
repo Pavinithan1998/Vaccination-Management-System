@@ -1,0 +1,58 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\PublicController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('Auth.login');
+});
+
+Route::post('/login',[AuthController::class,'loginFunction'])->name('login');
+
+Route::get('/admin/dashboard',function(){
+    return view('Admin.dashboard');
+});
+Route::get('/staff/dashboard',function(){
+    return view('Staff.dashboard');
+});
+Route::get('/public/dashboard',function(){
+    return view('Public.dashboard');
+});
+
+//staff register
+Route::post('/staff',[AdminController::class,'StaffRegistration'])->name('staff');
+Route::get('/admin/create-staff',function(){
+    return view('admin.register');
+});
+
+//public register
+Route::post('/public',[PublicController::class,'PublicRegistration'])->name('public');
+Route::get('/public/register',function(){
+    return view('public.register');
+});
+
+//smartvaccination
+Route::post('/smartvaccination',[PublicController::class,'SmartVaccination'])->name('smartvaccination');
+Route::get('/public/smartvc',function(){
+    return view('public.SmartVC');
+});
+
+// Route::get('/public/details',function(){
+//     return view('public.details');
+// });
+
+Route::get('/public/details',[PublicController::class,'getPersonDetails']);
