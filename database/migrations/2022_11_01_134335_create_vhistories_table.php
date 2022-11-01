@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vaccines', function (Blueprint $table) {
+        Schema::create('vhistories', function (Blueprint $table) {
             $table->id();
-            $table->string('pass')->unique();
-            $table->string('fullname');
-            $table->integer('age');
-            $table->string('email')->unique();
-            $table->string('file')->nullable();
-            $table->string('file')->nullable();
+            $table->string('nic')->unique();
+            $table->string('date');
+            $table->string('vp');
+            $table->string('bnum');
+            $table->integer('vstatus');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaccines');
+        Schema::dropIfExists('vhistories');
     }
 };

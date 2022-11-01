@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\vaccine;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
                 }
                 else if($user->role == 'public')
                 {
-                    return view('public.dashboard',compact($user));
+                    return view('public.dashboard',compact('user'));
                 }
             }
             else
@@ -39,6 +40,15 @@ class AuthController extends Controller
         else
         {
             return back()->with('fail','User not exist');
+        }
+    }
+
+    function logout()
+    {
+        if(Session::has('loginId'))
+        {
+            Session::pull('loginId');
+            return redirect('/');
         }
     }
 }

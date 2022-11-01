@@ -75,7 +75,7 @@ class PublicController extends Controller
             $res = $report->save();
                 if($res)
                 {
-                    return redirect('/public/dashboard')->with('success','Registration Successfully');
+                    return back()->with('success','Registration Successfully');
                 }
                 else
                 {
@@ -88,11 +88,11 @@ class PublicController extends Controller
         }
     }
 
-    function getPersonDetails()
+    function publicDashboard()
     {
-        $person = User::where('id','=',Session('loginId'))->get();
+        $user = User::where('id','=',Session('loginId'))->first();
         // print($person->fname);
-        // return view('public.dashboard',compact($person));
+        return view('public.dashboard',compact('user'));
         
         
     }
